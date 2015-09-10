@@ -99,7 +99,6 @@ struct Example {
 Failure to infer type inside a capture list could lead to a rather verbose line of code. Only specify types if needed.
 
 ```swift
-
 let people = [
     ("Mary", 42),
     ("Susan", 27),
@@ -115,7 +114,6 @@ let strings = people.map() {
 If at all possible remove the types if the compiler can infer them:
 
 ```swift
-
 let strings = people.map() {
     (name, age) in
     return "\(name) is \(age) years old"
@@ -260,14 +258,14 @@ Do not use chained methods as a more "convenient" replacement for property sette
 
 Prefer:
 
-```
+```swift
 instance.foo = 42
 instance.bar = "xyzzy"
 ```
 
 to:
 
-```
+```swift
 instance.setFoo(42).setBar("xyzzy")
 ```
 
@@ -281,7 +279,7 @@ Swift 2's do/try/catch mechanism is fantastic. Use it. (TODO: provide examples)
 
 In general prefer:
 
-```
+```swift
 do {
     try somethingThatMightThrow()
 }
@@ -304,7 +302,7 @@ When possible, use `guard` statements to handle early returns or other exits (e.
 
 Prefer:
 
-```
+```swift
 guard let safeValue = criticalValue else {
     fatalError("criticalValue cannot be nil here")
 }
@@ -313,7 +311,7 @@ someNecessaryOperation(safeValue)
 
 to:
 
-```
+```swift
 if let safeValue = criticalValue {
     someNecessaryOperation(safeValue)
 } else {
@@ -323,7 +321,7 @@ if let safeValue = criticalValue {
 
 or:
 
-```
+```swift
 if criticalValue == nil {
     fatalError("criticalValue cannot be nil here")
 }
