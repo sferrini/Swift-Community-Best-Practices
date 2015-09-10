@@ -245,7 +245,7 @@ Methods and properties that are peripheral to an instance should be moved to an 
 
 You should use extensions to help organise your instance definitions. One good example of this is a view controller that implements table view data source and delegate protocols. Instead of mixing all that table view code into one class, put the data source and delegate methods onto extensions that adopt the relevant protocol.
 
-Inside a single source file feel free to break down a definition into whatever extensions you feel best organise the code in question. Don't worry about methods in the main class or struct definition referring to methods or properties inside extensions. As long as it's all contained within one swift file it is all good.
+Inside a single source file feel free to break down a definition into whatever extensions you feel best organise the code in question. Don't worry about methods in the main class or struct definition referring to methods or properties inside extensions. As long as it's all contained within one Swift file it is all good.
 
 Conversely the main instance definition should not refer to elements defined in extensions outside of the main Swift file..
 
