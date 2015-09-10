@@ -136,7 +136,7 @@ class PhysicsModel {
 }
 
 class Spaceship {
-    static let topSpeed = PhysicsModel.speedOFlightInAVacuum
+    static let topSpeed = PhysicsModel.speedOfLightInAVacuum
     var speed:Double
 
     func fullSpeedAhead() {
