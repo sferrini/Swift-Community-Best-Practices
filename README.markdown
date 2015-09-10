@@ -17,11 +17,11 @@ Discussion can be found on the [Swift-Lang slack][slack] (in the #bestpractices 
 [SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
 [slack]: http://swift-lang.schwa.io
 
-## Note to contributors
+### Note to contributors
 
 Please make sure all examples are runnable (which may not be the case for existing examples). This markdown will be converted to a Mac OS X playground.
 
-## Golden Rules
+### Golden Rules
 
 * Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and be prepared to see discrepancies in their example code.
 * Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
@@ -60,11 +60,13 @@ enum Planet {
 ```
 Needless contractions and abbreviations should be avoided where at all possible, you can actually type out the characters "ViewController" without any harm, rely on Xcode's autocompletion to save you typing in the future. Extremely common abbreviations such as URL are fine. Abbreviations should be represented all uppercase ("URL") or all lowercase "url" as appropriate: use the same rule for types and variables: if url was a type it would be uppercase, if url was a variable it would be lower case.
 
-## Comments
+### Comments
 
 Comments should _not_ be used to disable code. Commented out code is dead code and pollutes your source. If you want to remove code but keep it around in case it's useful in the future you should be relying on git and/or your bug tracker.
 
-## Type inference
+## Best Practices
+
+### Type inference
 
 Where possible use Swift’s type inference to help reduce redundant type information. For example, prefer:
 
@@ -92,7 +94,7 @@ struct Example {
 }
 ```
 
-## Capture List inference
+### Capture List inference
 
 Failure to infer type inside a capture list could lead to a rather verbose line of code. Only specify types if needed.
 
@@ -126,7 +128,7 @@ Apple can and will change the parameter types of closures (optionals removed or 
 
 (see also: http://www.russbishop.net/swift-capture-lists)
 
-## Constants
+### Constants
 
 Constants used within type definitions should be declared static. For example:
 
@@ -149,7 +151,7 @@ Making the constants static allow them to be referred to without instances of th
 
 Constants at global level should be avoided except for singletons.
 
-## Computed properties
+### Computed properties
 
 Use the short version of computed properties if you only need to implement a getter. For example, prefer this:
 
@@ -188,7 +190,7 @@ class Person {
 }
 ```
 
-## Converting Instances
+### Converting Instances
 
 When creating code to convert instances from one type to another use either "to" methods, e.g.:
 
@@ -224,7 +226,7 @@ struct Mood {
 
 getters should generally be limited to returning components of the receiving type. For example returning the area of a `Circle` instance is well suited to be a getter, but converting a `Circle` to a `CGPath` is better as a "to" function or an `init()` extension on `CGPath`.
 
-## Singletons
+### Singletons
 
 Singletons are simple in Swift:
 
@@ -240,7 +242,7 @@ Singletons should generally just be named "sharedInstance" unless you have a com
 
 Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more chances to complain about how singletons are an anti-pattern and should be avoided at all costs. Your fellow developers will thank you.
 
-## Extensions for code organisation
+### Extensions for code organisation
 
 Extensions should be used to help organise code.
 
@@ -252,7 +254,7 @@ Inside a single source file feel free to break down a definition into whatever e
 
 Conversely the main instance definition should not refer to elements defined in extensions outside of the main swift file..
 
-## Chained Setters
+### Chained Setters
 
 Do not use chained methods as a more "convenient" replacement for property setters:
 
@@ -271,11 +273,11 @@ instance.setFoo(42).setBar("xyzzy")
 
 Traditional setters are far easier and require far less boilerplate code than chain-able setters.
 
-## Error handling
+### Error handling
 
 Swift 2's do/try/catch mechanism is fantastic. Use it. (TODO: provide examples)
 
-## Avoid try!
+### Avoid try!
 
 In general prefer:
 
@@ -292,11 +294,11 @@ To plain `try!`. Even though this form is far more verbose it provides context t
 
 It is ok to use try! as a temporary error handler until a more comprehensive error handling strategy is evolved. But suggest you periodically sweep your code for any errant `try!` that might have snuck past your code reviews and convert them to the more verbose syntax.
 
-## Avoid try? where possible
+### Avoid try? where possible
 
 `try?` is used to "squelch" errors and is only useful if you truly don't care if the error is generated. In general though, you might want to catch the error and at least log the failure.
 
-## Early Returns & Guards
+### Early Returns & Guards
 
 When possible, use `guard` statements to handle early returns or other exits (e.g. errors).
 
@@ -332,24 +334,28 @@ This flattens code otherwise tucked into an `if let` block, and keeps early exit
 
 Even when you're not capturing a value (`guard let`), this pattern enforces the early exit at compile time. In the second `if` example, though code is flattened like with `guard`, accidentally changing from a fatal error or other return to some non-exiting operation will cause a crash (or invalid state depending on the exact case). Removing an early exit from the `else` block of a `guard` statement would immediately reveal the mistake.
 
-## Implicitly unwrapped optionals
+## TODO Section
 
-## Reference vs value types
+This is a list of headings for possible future expansion.
 
-## Async Closures
+### Implicitly unwrapped optionals
 
-## unowned vs weak
+### Reference vs value types
 
-## Cocoa Delegates
+### Async Closures
 
-## Immutable structs
+### unowned vs weak
 
-## Instance initialisation
+### Cocoa Delegates
 
-## Logging & Printing
+### Immutable structs
 
-## log.debug statements
+### Instance initialisation
 
-## Computed Properties vs Functions
+### Logging & Printing
 
-## Value types and equality
+### log.debug statements
+
+### Computed Properties vs Functions
+
+### Value types and equality
