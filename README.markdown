@@ -202,6 +202,8 @@ extension NSColor {
 }
 ```
 
+(NOTE: Apple has gone down the path of `init()` methods for conversions. It seems generally best to follow Apple's lead.)
+
 While you might be tempted to use a getter, e.g.g:
 
 ```swift
