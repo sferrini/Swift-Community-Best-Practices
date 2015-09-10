@@ -4,23 +4,31 @@ Best practices for software development with Swift.
 
 ## Preface
 
-This is very much a work in progress. Contributions are very much appreciated.
+This document grew from an set of notes I produced while working on [SwiftGraphics][SwiftGraphics]. Most of the recommendations in this guide are definitely considered opinions and arguments could be made for other approachs. That's fine. When other approachs make sense they should be presented in addition.
+
+These best practices do dictact or recommend whether Swift should be used in an procedural, object-oriented or functional manner. Instead a pragmatic approach is taken. Individual recommendations might be focused on OOP or functional solutions as needed.
+
+The scope of this document is mostly aimed at the Swift language and Swift standard library. That said specific recommendations on how to use Swift with Mac OS, iOS, WatchOS and TVOS might be provided if a unique Swift angle or insight can be provided. Hints & tips style recommendations on how to use Swift effectively with Xcode and LLDB might also be provided.
+
+This is very much a work in progress. Contributions are very much appreciated in the form of pull requests or filing of issues.
+
+Discussion can be found on the [Swift-Lang slack][slack] (in the #bestpractices channel)
+
+[SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
+[slack]: http://swift-lang.schwa.io
 
 ## Note to contributors
 
-Please make sure all examples are runnable. This markdown will be converted to a Mac OS X playground.
-
-## Preface
-
-See: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
+Please make sure all examples are runnable (which may not be the case for existing examples). This markdown will be converted to a Mac OS X playground.
 
 ## Golden Rules
 
-Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
+* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and be prepared to see discrepencies in their example code.
+* Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
 
 ## Style Guide
 
-This document is not intended to be a style guide. Although some style advice is given, it's clear that the world doesn't need more language style debats and argument. Use the style Apple has defined within their “[The Swift Programming Language][1]” book. This document will contain further clarifications where necessary.
+This document is not intended to be a style guide. Although some style advice is given, it's clear that the world doesn't need more language style debate and argument. Use the style Apple has defined within their “[The Swift Programming Language][1]” book. This document will contain further clarifications where necessary.
 
 [1]: https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/index.html
 
@@ -301,7 +309,7 @@ guard let safeValue = criticalValue else {
 someNecessaryOperation(safeValue)
 ```
 
-to: 
+to:
 
 ```
 if let safeValue = criticalValue {
