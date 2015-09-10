@@ -80,7 +80,7 @@ var currentLocation: Location = Location()
 
 ### self inference
 
-Let the compiler infer self in all cases where it is able to. Areas where self should be explicitly used includes setting parameters in init, and non-escaping closures. For example
+Let the compiler infer self in all cases where it is able to. Areas where self should be explicitly used includes setting parameters in init, and non-escaping closures. For example:
 
 ```swift
 struct Example {
@@ -234,7 +234,7 @@ class ControversyManager {
 }
 ```
 
-The Swift runtime will make sure that singleton is created and accessed in a a thread-safe manner.
+The Swift runtime will make sure that the singleton is created and accessed in a thread-safe manner.
 
 Singletons should generally just be named "sharedInstance" unless you have a compelling reason to name it otherwise
 
@@ -269,7 +269,7 @@ to:
 instance.setFoo(42).setBar("xyzzy")
 ```
 
-Traditional setters are far easier and require far less boilerplate code than chainable setters.
+Traditional setters are far easier and require far less boilerplate code than chain-able setters.
 
 ## Error handling
 
@@ -294,7 +294,7 @@ It is ok to use try! as a temporary error handler until a more comprehensive err
 
 ## Avoid try? where possible
 
-`try?` is used to "squelch" errors and is only useful if you truly don't care if the error is generated. In general though you might want to catch the error and at least log the failure.
+`try?` is used to "squelch" errors and is only useful if you truly don't care if the error is generated. In general though, you might want to catch the error and at least log the failure.
 
 ## Early Returns & Guards
 
@@ -332,6 +332,8 @@ This flattens code otherwise tucked into an `if let` block, and keeps early exit
 
 Even when you're not capturing a value (`guard let`), this pattern enforces the early exit at compile time. In the second `if` example, though code is flattened like with `guard`, accidentally changing from a fatal error or other return to some non-exiting operation will cause a crash (or invalid state depending on the exact case). Removing an early exit from the `else` block of a `guard` statement would immediately reveal the mistake.
 
+## Implicitly unwrapped optionals
+
 ## Reference vs value types
 
 ## Async Closures
@@ -344,9 +346,7 @@ Even when you're not capturing a value (`guard let`), this pattern enforces the 
 
 ## Instance initialisation
 
-## Logging
-
-## print/println
+## Logging & Printing
 
 ## log.debug statements
 
