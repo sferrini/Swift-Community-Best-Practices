@@ -17,7 +17,7 @@ Discussion can be found on the [Swift-Lang slack][slack] (in the #bestpractices 
 [SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
 [slack]: http://swift-lang.schwa.io
 
-### Note to contributors
+### Note to Contributors
 
 Please make sure all examples are runnable (which may not be the case for existing examples). This markdown will be converted to a Mac OS X playground.
 
@@ -80,7 +80,7 @@ to:
 var currentLocation: Location = Location()
 ```
 
-### self inference
+### Self Inference
 
 Let the compiler infer self in all cases where it is able to. Areas where self should be explicitly used includes setting parameters in init, and non-escaping closures. For example:
 
@@ -94,7 +94,7 @@ struct Example {
 }
 ```
 
-### Capture List inference
+### Capture List Inference
 
 Failure to infer type inside a capture list could lead to a rather verbose line of code. Only specify types if needed.
 
@@ -151,7 +151,7 @@ Making the constants static allow them to be referred to without instances of th
 
 Constants at global level should be avoided except for singletons.
 
-### Computed properties
+### Computed Properties
 
 Use the short version of computed properties if you only need to implement a getter. For example, prefer this:
 
@@ -242,7 +242,7 @@ Singletons should generally just be named "sharedInstance" unless you have a com
 
 Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more chances to complain about how singletons are an anti-pattern and should be avoided at all costs. Your fellow developers will thank you.
 
-### Extensions for code organisation
+### Extensions for Code Organisation
 
 Extensions should be used to help organise code.
 
@@ -273,11 +273,11 @@ instance.setFoo(42).setBar("xyzzy")
 
 Traditional setters are far easier and require far less boilerplate code than chain-able setters.
 
-### Error handling
+### Error Handling
 
 Swift 2's do/try/catch mechanism is fantastic. Use it. (TODO: provide examples)
 
-### Avoid try!
+### Avoid `try!`
 
 In general prefer:
 
@@ -294,7 +294,7 @@ To plain `try!`. Even though this form is far more verbose it provides context t
 
 It is ok to use try! as a temporary error handler until a more comprehensive error handling strategy is evolved. But suggest you periodically sweep your code for any errant `try!` that might have snuck past your code reviews and convert them to the more verbose syntax.
 
-### Avoid try? where possible
+### Avoid `try?` where possible
 
 `try?` is used to "squelch" errors and is only useful if you truly don't care if the error is generated. In general though, you might want to catch the error and at least log the failure.
 
@@ -338,24 +338,24 @@ Even when you're not capturing a value (`guard let`), this pattern enforces the 
 
 This is a list of headings for possible future expansion.
 
-### Implicitly unwrapped optionals
+### Protocols & Protocol Driven Development
 
-### Reference vs value types
+### Implicitly Unwrapped Optionals
+
+### Reference vs Value Types
 
 ### Async Closures
 
-### unowned vs weak
+### `unowned` vs `weak`
 
 ### Cocoa Delegates
 
-### Immutable structs
+### Immutable Structs
 
-### Instance initialisation
+### Instance Initialisation
 
 ### Logging & Printing
 
-### log.debug statements
-
 ### Computed Properties vs Functions
 
-### Value types and equality
+### Value Types and Equality
