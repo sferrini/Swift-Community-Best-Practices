@@ -290,6 +290,40 @@ It is ok to use try! as a temporary error handler until a more comprehensive err
 
 ## Early Returns & Guards
 
+When possible, use `guard` statements to handle early returns or other exits (e.g. errors).
+
+Prefer:
+
+```
+guard let safeValue = criticalValue else {
+    fatalError("criticalValue cannot be nil here")
+}
+someNecessaryOperation(safeValue)
+```
+
+to: 
+
+```
+if let safeValue = criticalValue {
+    someNecessaryOperation(safeValue)
+} else {
+    fatalError("criticalValue cannot be nil here")
+}
+```
+
+or:
+
+```
+if criticalValue == nil {
+    fatalError("criticalValue cannot be nil here")
+}
+someNecessaryOperation(criticalValue!)
+```
+
+This flattens code otherwise tucked into an `if let` block, and keeps early exits near their relevant condition instead of down in an `else` block.
+
+Even when you're not capturing a value (`guard let`), this pattern enforces the early exit at compile time. In the second `if` example, though code is flattened like with `guard`, accidentally changing from a fatal error or other return to some non-exiting operation will cause a crash (or invalid state depending on the exact case). Removing an early exit from the `else` block of a `guard` statement would immediately reveal the mistake.
+
 ## Reference vs value types
 
 ## Async Closures
