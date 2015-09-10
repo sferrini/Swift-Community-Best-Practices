@@ -14,23 +14,18 @@ This is very much a work in progress. Contributions are very much appreciated in
 
 Discussion can be found on the [Swift-Lang slack][slack] (in the #bestpractices channel)
 
-[SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
-[slack]: http://swift-lang.schwa.io
-
 ### Note to Contributors
 
 Please make sure all examples are runnable (which may not be the case for existing examples). This markdown will be converted to a Mac OS X playground.
 
 ### Golden Rules
 
-* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and be prepared to see discrepancies in their example code.
+* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and we should be prepared to see discrepancies in their example code.
 * Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
 
 ## Style Guide
 
-This document is not intended to be a style guide. Although some style advice is given, it's clear that the world doesn't need more language style debate and argument. Use the style Apple has defined within their “[The Swift Programming Language][1]” book. This document will contain further clarifications where necessary.
-
-[1]: https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/index.html
+This document is not intended to be a style guide. Although some style advice is given, it's clear that the world doesn't need more language style debate and argument. Use the style Apple has defined within their “[The Swift Programming Language][Swift_Programming_Language]” book. This document will contain further clarifications where necessary.
 
 ### Whitespace
 
@@ -38,18 +33,18 @@ Tabs are four spaces. It's the Xcode default. Deal with it.
 
 ### Naming
 
-As per the “Swift Programming Language” types should be [upper camel case][1] (example: “VehicleController”).
+As per the “Swift Programming Language” types should be [upper camel case][Studly_caps] (example: “`VehicleController`”).
 
-[1]: https://en.wikipedia.org/wiki/Studly_caps
+[Studly_caps]: https://en.wikipedia.org/wiki/Studly_caps
 
-Variables and constants should be lower camel case (example “vehicleName”).
+Variables and constants should be lower camel case (example “`vehicleName`”).
 
 You should rely on Swift modules to help namespace your code and not use Objective-C style class prefixes for Swift code (unless of course interfacing with Objective-C).
 
-Do not use any form of [Hungarian notation][1] (e.g. k for constants, m for methods), instead use short concise names and use Xcode's type Quick Help (⌥ + click) to discover a variable's type. Similarly do not use [SNAKE_CASE][2].
+Do not use any form of [Hungarian notation][Hungarian_notation] (e.g. k for constants, m for methods), instead use short concise names and use Xcode's type Quick Help (⌥ + click) to discover a variable's type. Similarly do not use [`SNAKE_CASE`][Snake_case].
 
-[1]: https://en.wikipedia.org/wiki/Hungarian_notation
-[2]: https://en.wikipedia.org/wiki/Snake_case
+[Hungarian_notation]: https://en.wikipedia.org/wiki/Hungarian_notation
+[Snake_case]: https://en.wikipedia.org/wiki/Snake_case
 
 The only exception to this general rule are enum values, which should be uppercase (this follows Apple's "Swift Programming Language" style):
 
@@ -173,7 +168,7 @@ class Example {
 }
 ```
 
-If you add a set or a didSet to the property then you will need to explicitly provide a get.
+If you add a `set` or a `didSet` to the property then you will need to explicitly provide a `get`.
 
 ```swift
 class Person {
@@ -236,7 +231,7 @@ class ControversyManager {
 
 The Swift runtime will make sure that the singleton is created and accessed in a thread-safe manner.
 
-Singletons should generally just be named "sharedInstance" unless you have a compelling reason to name it otherwise
+Singletons should generally just be named "`sharedInstance`" unless you have a compelling reason to name it otherwise
 
 Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more chances to complain about how singletons are an anti-pattern and should be avoided at all costs. Your fellow developers will thank you.
 
@@ -250,7 +245,7 @@ You should use extensions to help organise your instance definitions. One good e
 
 Inside a single source file feel free to break down a definition into whatever extensions you feel best organise the code in question. Don't worry about methods in the main class or struct definition referring to methods or properties inside extensions. As long as it's all contained within one swift file it is all good.
 
-Conversely the main instance definition should not refer to elements defined in extensions outside of the main swift file..
+Conversely the main instance definition should not refer to elements defined in extensions outside of the main Swift file..
 
 ### Chained Setters
 
@@ -273,7 +268,7 @@ Traditional setters are far easier and require far less boilerplate code than ch
 
 ### Error Handling
 
-Swift 2's do/try/catch mechanism is fantastic. Use it. (TODO: provide examples)
+Swift 2's `do`/`try`/`catch` mechanism is fantastic. Use it. (TODO: provide examples)
 
 ### Avoid `try!`
 
@@ -288,9 +283,15 @@ catch {
 }
 ```
 
-To plain `try!`. Even though this form is far more verbose it provides context to other developers and hopefully useful information in the log.
+to:
 
-It is ok to use try! as a temporary error handler until a more comprehensive error handling strategy is evolved. But suggest you periodically sweep your code for any errant `try!` that might have snuck past your code reviews and convert them to the more verbose syntax.
+```swift
+try! somethingThatMightThrow()
+```
+
+Even though this form is far more verbose it provides context to other developers and hopefully useful information in the log.
+
+It is okay to use `try!` as a temporary error handler until a more comprehensive error handling strategy is evolved. But suggest you periodically sweep your code for any errant `try!` that might have snuck past your code reviews and convert them to the more verbose syntax.
 
 ### Avoid `try?` where possible
 
@@ -298,7 +299,7 @@ It is ok to use try! as a temporary error handler until a more comprehensive err
 
 ### Early Returns & Guards
 
-When possible, use `guard` statements to handle early returns or other exits (e.g. errors).
+When possible, use `guard` statements to handle early returns or other exits (e.g. fatal errors or thrown errors).
 
 Prefer:
 
@@ -357,3 +358,7 @@ This is a list of headings for possible future expansion.
 ### Computed Properties vs Functions
 
 ### Value Types and Equality
+
+[SwiftGraphics]: https://github.com/schwa/SwiftGraphics/blob/develop/Documentation/Notes.markdown
+[slack]: http://swift-lang.schwa.io
+[Swift_Programming_Language]: https://developer.apple.com/library/prerelease/ios/documentation/Swift/Conceptual/Swift_Programming_Language/index.html
