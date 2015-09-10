@@ -4,9 +4,9 @@ Best practices for software development with Swift.
 
 ## Preface
 
-This document grew from an set of notes I produced while working on [SwiftGraphics][SwiftGraphics]. Most of the recommendations in this guide are definitely considered opinions and arguments could be made for other approachs. That's fine. When other approachs make sense they should be presented in addition.
+This document grew from an set of notes I produced while working on [SwiftGraphics][SwiftGraphics]. Most of the recommendations in this guide are definitely considered opinions and arguments could be made for other approaches. That's fine. When other approaches make sense they should be presented in addition.
 
-These best practices do dictact or recommend whether Swift should be used in an procedural, object-oriented or functional manner. Instead a pragmatic approach is taken. Individual recommendations might be focused on OOP or functional solutions as needed.
+These best practices do not dictate or recommend whether Swift should be used in an procedural, object-oriented or functional manner. Instead a pragmatic approach is taken. Individual recommendations might be focused on OOP or functional solutions as needed.
 
 The scope of this document is mostly aimed at the Swift language and Swift standard library. That said specific recommendations on how to use Swift with Mac OS, iOS, WatchOS and TVOS might be provided if a unique Swift angle or insight can be provided. Hints & tips style recommendations on how to use Swift effectively with Xcode and LLDB might also be provided.
 
@@ -23,7 +23,7 @@ Please make sure all examples are runnable (which may not be the case for existi
 
 ## Golden Rules
 
-* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and be prepared to see discrepencies in their example code.
+* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and be prepared to see discrepancies in their example code.
 * Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
 
 ## Style Guide
@@ -46,7 +46,7 @@ Variables and constants should be lower camel case (example “vehicleName”).
 
 You should rely on Swift modules to help namespace your code and not use Objective-C style class prefixes for Swift code (unless of course interfacing with Objective-C).
 
-Do not use any form of [Hungarian notation][1] (e.g. k for constants, m for methods), instead use short concise names and use Xcode's type Quick Help (⌥ + click) to discover a variable's type. Similiarly do not use [SNAKE_CASE][2].
+Do not use any form of [Hungarian notation][1] (e.g. k for constants, m for methods), instead use short concise names and use Xcode's type Quick Help (⌥ + click) to discover a variable's type. Similarly do not use [SNAKE_CASE][2].
 
 [1]: https://en.wikipedia.org/wiki/Hungarian_notation
 [2]: https://en.wikipedia.org/wiki/Snake_case
@@ -99,7 +99,7 @@ Failure to infer type inside a capture list could lead to a rather verbose line 
 ```swift
 
 let people = [
-    ("Mary", 42]),
+    ("Mary", 42),
     ("Susan", 27),
     ("Charlie", 18),
 ]
@@ -120,7 +120,7 @@ let strings = people.map() {
 }
 ```
 
-Using the numbered parameter names ("`$0`") further reduces verbosity, often elliminating capture lists completely. Only use the numbered form when the parameter names add no further information to the closure (e.g. very simple maps and filters).
+Using the numbered parameter names ("`$0`") further reduces verbosity, often eliminating capture lists completely. Only use the numbered form when the parameter names add no further information to the closure (e.g. very simple maps and filters).
 
 Apple can and will change the parameter types of closures (optionals removed or changed to auto-unwrapping etc). Intentionally under-specifying your optionals and relying on Swift to infer the information it needs, reduces the risk of the code breaking under these circumstances.
 
@@ -145,7 +145,7 @@ class Spaceship {
 }
 ```
 
-Making the constants static allow them to be refered to without instances of the type. They also allow other code to access the constants.
+Making the constants static allow them to be referred to without instances of the type. They also allow other code to access the constants.
 
 Constants at global level should be avoided except for singletons.
 
@@ -212,7 +212,7 @@ extension NSColor {
 
 (NOTE: Apple has gone down the path of `init()` methods for conversions. It seems generally best to follow Apple's lead.)
 
-While you might be tempted to use a getter, e.g.g:
+While you might be tempted to use a getter, e.g:
 
 ```swift
 struct Mood {
@@ -238,7 +238,7 @@ The Swift runtime will make sure that singleton is created and accessed in a a t
 
 Singletons should generally just be named "sharedInstance" unless you have a compelling reason to name it otherwise
 
-Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more chances to complain about how singletons are an antipattern and should be avoided at all costs. Your fellow developers will thank you.
+Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more chances to complain about how singletons are an anti-pattern and should be avoided at all costs. Your fellow developers will thank you.
 
 ## Extensions for code organisation
 
@@ -246,7 +246,7 @@ Extensions should be used to help organise code.
 
 Methods and properties that are peripheral to an instance should be moved to an extension. Note that not all property types can be moved to an extension - do the best you can within this limitation.
 
-You should use extensions to help organise your instance definitions. One good example of this is a view controller that implements table view data source and delegate protocols. Instead of mixing all that table view code into one class, put the data source and delegate methods onto extensions that adopt the relevent protocol.
+You should use extensions to help organise your instance definitions. One good example of this is a view controller that implements table view data source and delegate protocols. Instead of mixing all that table view code into one class, put the data source and delegate methods onto extensions that adopt the relevant protocol.
 
 Inside a single source file feel free to break down a definition into whatever extensions you feel best organise the code in question. Don't worry about methods in the main class or struct definition referring to methods or properties inside extensions. As long as it's all contained within one swift file it is all good.
 
