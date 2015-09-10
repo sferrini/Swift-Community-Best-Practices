@@ -33,7 +33,7 @@ Tabs are four spaces. It's the Xcode default. Deal with it.
 
 ### Naming
 
-As per the “Swift Programming Language” types should be [upper camel case][Studly_caps] (example: “`VehicleController`”).
+As per the “[Swift Programming Language][Swift_Programming_Language]” type names should be [upper camel case][Studly_caps] (example: “`VehicleController`”).
 
 [Studly_caps]: https://en.wikipedia.org/wiki/Studly_caps
 
@@ -46,7 +46,7 @@ Do not use any form of [Hungarian notation][Hungarian_notation] (e.g. k for cons
 [Hungarian_notation]: https://en.wikipedia.org/wiki/Hungarian_notation
 [Snake_case]: https://en.wikipedia.org/wiki/Snake_case
 
-The only exception to this general rule are enum values, which should be uppercase (this follows Apple's "Swift Programming Language" style):
+The only exception to this general rule are enum values, which should be uppercase (this follows Apple's "[Swift Programming Language][Swift_Programming_Language]" style):
 
 ```swift
 enum Planet {
@@ -58,6 +58,8 @@ Needless contractions and abbreviations should be avoided where at all possible,
 ### Comments
 
 Comments should _not_ be used to disable code. Commented out code is dead code and pollutes your source. If you want to remove code but keep it around in case it's useful in the future you should be relying on git and/or your bug tracker.
+
+(TODO: Add section about doc comments with link to nshipster)
 
 ## Best Practices
 
@@ -81,9 +83,9 @@ Let the compiler infer self in all cases where it is able to. Areas where self s
 
 ```swift
 struct Example {
-    let name:String
+    let name: String
 
-    init(name:String) {
+    init(name: String) {
         self.name = name
     }
 }
@@ -101,7 +103,7 @@ let people = [
 ]
 
 let strings = people.map() {
-    (name:String, age:Int) -> String in
+    (name: String, age: Int) -> String in
     return "\(name) is \(age) years old"
 }
 ```
@@ -132,7 +134,7 @@ class PhysicsModel {
 
 class Spaceship {
     static let topSpeed = PhysicsModel.speedOfLightInAVacuum
-    var speed:Double
+    var speed: Double
 
     func fullSpeedAhead() {
         speed = Spaceship.topSpeed
@@ -199,8 +201,8 @@ Or `init()` methods:
 
 ```swift
 extension NSColor {
-    convenience init(_ mood:Mood) {
-        super.init(color:NSColor.blueColor)
+    convenience init(_ mood: Mood) {
+        super.init(color: NSColor.blueColor)
     }
 }
 ```
