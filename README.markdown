@@ -116,8 +116,7 @@ Apple can and will change the parameter types of closures provided by their Swif
 
 You should almost always refrain from specifying the return type. For example this capture list is completely redudant:
 
-```
-swift
+```swift
 dispatch_async(queue) {
     () -> Void in
     print("Fired.")
