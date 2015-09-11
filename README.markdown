@@ -20,16 +20,10 @@ Please make sure all examples are runnable (which may not be the case for existi
 
 ### Golden Rules
 
-* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. However Apple is a large corporation and we should be prepared to see discrepancies in their example code.
+* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. You should also follow the style of Apple's code as defined within their “[The Swift Programming Language][Swift_Programming_Language]” book wherever possible. However Apple is a large corporation and we should be prepared to see discrepancies in their example code.
 * Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
 
-## Style Guide
-
-This document is not intended to be a style guide. Although some style advice is given, it's clear that the world doesn't need more language style debate and argument. Use the style Apple has defined within their “[The Swift Programming Language][Swift_Programming_Language]” book. This document will contain further clarifications where necessary.
-
-### Whitespace
-
-Tabs are four spaces. It's the Xcode default. Deal with it.
+## Best Practices
 
 ### Naming
 
@@ -60,8 +54,6 @@ Needless contractions and abbreviations should be avoided where at all possible,
 Comments should _not_ be used to disable code. Commented out code is dead code and pollutes your source. If you want to remove code but keep it around in case it's useful in the future you should be relying on git and/or your bug tracker.
 
 (TODO: Add section about doc comments with link to nshipster)
-
-## Best Practices
 
 ### Type inference
 
