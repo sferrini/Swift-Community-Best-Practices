@@ -6,7 +6,7 @@ Best practices for software development with Swift.
 
 This document grew from an set of notes I produced while working on [SwiftGraphics][SwiftGraphics]. Most of the recommendations in this guide are definitely considered opinions and arguments could be made for other approaches. That's fine. When other approaches make sense they should be presented in addition.
 
-These best practices do not dictate or recommend whether Swift should be used in an procedural, object-oriented or functional manner. Instead a pragmatic approach is taken. Individual recommendations might be focused on OOP or functional solutions as needed.
+These best practices do not dictate or recommend whether Swift should be used in an procedural, object-oriented or functional manner. Instead a pragmatic approach is taken. Individual recommendations might be focused on object-oriented or functional solutions as needed.
 
 The scope of this document is mostly aimed at the Swift language and Swift standard library. That said specific recommendations on how to use Swift with Mac OS, iOS, WatchOS and TVOS might be provided if a unique Swift angle or insight can be provided. Hints & tips style recommendations on how to use Swift effectively with Xcode and LLDB might also be provided.
 
@@ -20,7 +20,7 @@ Please make sure all examples are runnable (which may not be the case for existi
 
 ### Golden Rules
 
-* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. You should also follow the style of Apple's code as defined within their “[The Swift Programming Language][Swift_Programming_Language]” book wherever possible. However Apple is a large corporation and we should be prepared to see discrepancies in their example code.
+* Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. You should follow the style of Apple's code as defined within their “[The Swift Programming Language][Swift_Programming_Language]” book wherever possible. However Apple is a large corporation and be prepared to see discrepancies in their example code.
 * Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
 
 ## Best Practices
@@ -33,7 +33,7 @@ As per the “[Swift Programming Language][Swift_Programming_Language]” type n
 
 Variables and constants should be lower camel case (example “`vehicleName`”).
 
-You should rely on Swift modules to help namespace your code and not use Objective-C style class prefixes for Swift code (unless of course interfacing with Objective-C).
+You should use Swift modules to namespace your code and not use Objective-C style class prefixes for Swift code (unless of course interfacing with Objective-C).
 
 Do not use any form of [Hungarian notation][Hungarian_notation] (e.g. k for constants, m for methods), instead use short concise names and use Xcode's type Quick Help (⌥ + click) to discover a variable's type. Similarly do not use [`SNAKE_CASE`][Snake_case].
 
@@ -47,7 +47,8 @@ enum Planet {
     case Mercury, Venus, Earth, Mars, Jupiter, Saturn, Uranus, Neptune
 }
 ```
-Needless contractions and abbreviations should be avoided where at all possible, you can actually type out the characters "ViewController" without any harm, rely on Xcode's autocompletion to save you typing in the future. Extremely common abbreviations such as URL are fine. Abbreviations should be represented all uppercase ("URL") or all lowercase "url" as appropriate: use the same rule for types and variables: if url was a type it would be uppercase, if url was a variable it would be lower case.
+
+Needless contractions and abbreviations should be avoided where at all possible, you can actually type out the characters "ViewController" without any harm and rely on Xcode's autocompletion to save you typing in the future. Extremely common abbreviations such as URL are fine. Abbreviations should be represented all uppercase ("URL") or all lowercase "url" as appropriate. Use the same rule for types and variables; if url was a type it would be uppercase, if url was a variable it would be lower case.
 
 ### Comments
 
@@ -57,7 +58,7 @@ Comments should _not_ be used to disable code. Commented out code is dead code a
 
 ### Type inference
 
-Where possible use Swift’s type inference to help reduce redundant type information. For example, prefer:
+Where possible, use Swift’s type inference to help reduce redundant type information. For example, prefer:
 
 ```swift
 var currentLocation = Location()
@@ -85,7 +86,7 @@ struct Example {
 
 ### Capture List Inference
 
-Failure to infer type inside a capture list could lead to a rather verbose line of code. Only specify types if needed.
+Specifying parameter types inside a capture list can lead to a rather verbose code. Only specify types if needed.
 
 ```swift
 let people = [
@@ -111,16 +112,26 @@ let strings = people.map() {
 
 Using the numbered parameter names ("`$0`") further reduces verbosity, often eliminating capture lists completely. Only use the numbered form when the parameter names add no further information to the closure (e.g. very simple maps and filters).
 
-Apple can and will change the parameter types of closures (optionals removed or changed to auto-unwrapping etc). Intentionally under-specifying your optionals and relying on Swift to infer the information it needs, reduces the risk of the code breaking under these circumstances.
+Apple can and will change the parameter types of closures provided by their Swift "conversion" of Objective-C frameworks. For example, optionals are removed or changed to auto-unwrapping etc. Intentionally under-specifying your optionals and relying on Swift to infer the types, reduces the risk of the code breaking under these circumstances.
+
+You should almost always refrain from specifying the return type. For example this capture list is completely redudant:
+
+```
+swift
+dispatch_async(queue) {
+    () -> Void in
+    print("Fired.")
+}
+```
 
 (see also: http://www.russbishop.net/swift-capture-lists)
 
 ### Constants
 
-Constants used within type definitions should be declared static. For example:
+Constants used within type definitions should be declared static within a type. For example:
 
 ```swift
-class PhysicsModel {
+struct PhysicsModel {
     static var speedOfLightInAVacuum = 299_792_458
 }
 
@@ -134,9 +145,9 @@ class Spaceship {
 }
 ```
 
-Making the constants static allow them to be referred to without instances of the type. They also allow other code to access the constants.
+Making the constants static allow them to be referred to without needing instances of the type.
 
-Constants at global level should be avoided except for singletons.
+Constants at global level should generally be avoided except for singletons.
 
 ### Computed Properties
 
@@ -166,12 +177,12 @@ If you add a `set` or a `didSet` to the property then you will need to explicitl
 
 ```swift
 class Person {
-    var age: UInt32 {
+    var age: Int {
         get {
-            return arc4random()
+            return Int(arc4random())
         }
         set {
-            print("Time flies like a banana so I'm throwing away your age")
+            print("That's not your age.")
         }
     }
 }
@@ -179,17 +190,7 @@ class Person {
 
 ### Converting Instances
 
-When creating code to convert instances from one type to another use either "to" methods, e.g.:
-
-```swift
-struct Mood {
-    func toColor() -> NSColor {
-        return NSColor.blueColor()
-  }
-}
-```
-
-Or `init()` methods:
+When creating code to convert instances from one type to another `init()` methods:
 
 ```swift
 extension NSColor {
@@ -198,8 +199,17 @@ extension NSColor {
     }
 }
 ```
+Init methods now seem to be the preferred manner to convert instances of one type to another in the Swift Standard Library.
 
-(NOTE: Apple has gone down the path of `init()` methods for conversions. It seems generally best to follow Apple's lead.)
+"to" methods are another reasonable technique (although you should follow Apple's lead and use init methods):
+
+```swift
+struct Mood {
+    func toColor() -> NSColor {
+        return NSColor.blueColor()
+  }
+}
+```
 
 While you might be tempted to use a getter, e.g:
 
@@ -225,25 +235,25 @@ class ControversyManager {
 
 The Swift runtime will make sure that the singleton is created and accessed in a thread-safe manner.
 
-Singletons should generally just be named "`sharedInstance`" unless you have a compelling reason to name it otherwise
+Singletons should generally just be accessed via "`sharedInstance`" static property unless you have a compelling reason to name it otherwise. Do not use static functions or global functions to access your singleton.
 
-Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more chances to complain about how singletons are an anti-pattern and should be avoided at all costs. Your fellow developers will thank you.
+(Because singletons are so easy in Swift and because consistent naming saves you so much time you will have even more time to complain about how singletons are an anti-pattern and should be avoided at all costs. Your fellow developers will thank you.)
 
 ### Extensions for Code Organisation
 
 Extensions should be used to help organise code.
 
-Methods and properties that are peripheral to an instance should be moved to an extension. Note that not all property types can be moved to an extension - do the best you can within this limitation.
+Methods and properties that are peripheral to an instance should be moved to an extension. Note that, currently not all property types can be moved to an extension - do the best you can within this limitation.
 
 You should use extensions to help organise your instance definitions. One good example of this is a view controller that implements table view data source and delegate protocols. Instead of mixing all that table view code into one class, put the data source and delegate methods onto extensions that adopt the relevant protocol.
 
-Inside a single source file feel free to break down a definition into whatever extensions you feel best organise the code in question. Don't worry about methods in the main class or struct definition referring to methods or properties inside extensions. As long as it's all contained within one Swift file it is all good.
+Inside a single source file feel free to break down a definition into whatever extensions you feel best organise the code in question. Don't worry about methods in the main class or struct definition referring to methods or properties inside extensions. As long as it is all contained within one Swift file it is all good.
 
-Conversely the main instance definition should not refer to elements defined in extensions outside of the main Swift file..
+Conversely, the main instance definition should not refer to elements defined in extensions outside of the main Swift file..
 
 ### Chained Setters
 
-Do not use chained methods as a more "convenient" replacement for property setters:
+Do not use chained methods as a more "convenient" replacement for simple property setters:
 
 Prefer:
 
@@ -262,7 +272,7 @@ Traditional setters are far easier and require far less boilerplate code than ch
 
 ### Error Handling
 
-Swift 2's `do`/`try`/`catch` mechanism is fantastic. Use it. (TODO: provide examples)
+Swift 2's `do`/`try`/`catch` mechanism is fantastic. Use it. (TODO: elaborate and provide examples)
 
 ### Avoid `try!`
 
@@ -283,13 +293,13 @@ to:
 try! somethingThatMightThrow()
 ```
 
-Even though this form is far more verbose it provides context to other developers and hopefully useful information in the log.
+Even though this form is far more verbose it provides context to other developers reviewing the code.
 
-It is okay to use `try!` as a temporary error handler until a more comprehensive error handling strategy is evolved. But suggest you periodically sweep your code for any errant `try!` that might have snuck past your code reviews and convert them to the more verbose syntax.
+It is okay to use `try!` as a temporary error handler until a more comprehensive error handling strategy is evolved. But it is suggested you periodically sweep your code for any errant `try!` that might have snuck past your code reviews.
 
 ### Avoid `try?` where possible
 
-`try?` is used to "squelch" errors and is only useful if you truly don't care if the error is generated. In general though, you might want to catch the error and at least log the failure.
+`try?` is used to "squelch" errors and is only useful if you truly don't care if the error is generated. In general though, you should catch the error and at least log the failure.
 
 ### Early Returns & Guards
 
