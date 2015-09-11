@@ -21,7 +21,7 @@ Please make sure all examples are runnable (which may not be the case for existi
 ### Golden Rules
 
 * Apple is generally right. Defer to Apple's preferred or demonstrated way of doing things. You should follow the style of Apple's code as defined within their “[The Swift Programming Language][Swift_Programming_Language]” book wherever possible. However Apple is a large corporation and be prepared to see discrepancies in their example code.
-* Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead.
+* Never write code merely to attempt to reduce the number of keystrokes you need to type. Rely on autocompletion, autosuggestion, copy and paste, etc instead. Verbosity is often helpful to other maintainers of your code. That said, being overly verbose can bypass one of Swift's key benefits: type inference.
 
 ## Best Practices
 
@@ -336,6 +336,20 @@ someNecessaryOperation(criticalValue!)
 This flattens code otherwise tucked into an `if let` block, and keeps early exits near their relevant condition instead of down in an `else` block.
 
 Even when you're not capturing a value (`guard let`), this pattern enforces the early exit at compile time. In the second `if` example, though code is flattened like with `guard`, accidentally changing from a fatal error or other return to some non-exiting operation will cause a crash (or invalid state depending on the exact case). Removing an early exit from the `else` block of a `guard` statement would immediately reveal the mistake.
+
+### "Early" Access Control
+
+Even if you code is not broken up into independent modules, you should always be thinking about access control. Marking a definition as "private" or "internal" can act as lightweight documentation for your code. Anyone reading the code will know that these elements are "hands off". Conversely, marking a definition as "public" is an invite for other code to access the marked elements. It is best to be explicit and not rely on Swift's default access control level ("internal").
+
+If your codebase grows in the future, it may end being broken down into sub-modules. Doing so on a codebase already decorated with access control information is much quicker and easier.
+
+### "Restrictive" Access Control
+
+It is generally better to be overly restrictive when adding access control to your code. Where it makes sense prefer "private" definitions to "internal", and prefer "internal" to "public" (note: "internal" is the default).
+
+It is far easier to change the access control of your code to be more permissive later (along the spectrum: "private" to "internal" to "public") as needed. Code that is has too permissive access control might be used inappropriately by other code. Making code more restrictive could involve finding the inappropriate or incorrect uses and providing better interfaces. This is a trying to close the stable door after the horse has bolted style problem. An example of this could be a type exposing an internal cache publically.
+
+Furthermore, restricting access to code limits the "exposed surface area" and allows the code to be refactored with less chance of impacting other code. Other techniques such as "Protocol Driven Development" can also help.
 
 ## TODO Section
 
