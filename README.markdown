@@ -114,7 +114,7 @@ Using the numbered parameter names ("`$0`") further reduces verbosity, often eli
 
 Apple can and will change the parameter types of closures provided by their Swift "conversion" of Objective-C frameworks. For example, optionals are removed or changed to auto-unwrapping etc. Intentionally under-specifying your optionals and relying on Swift to infer the types, reduces the risk of the code breaking under these circumstances.
 
-You should almost always refrain from specifying the return type. For example this capture list is completely redudant:
+You should almost always refrain from specifying the return type. For example this capture list is completely redundant:
 
 ```swift
 dispatch_async(queue) {
