@@ -338,7 +338,7 @@ Even when you're not capturing a value (`guard let`), this pattern enforces the 
 
 ### "Early" Access Control
 
-Even if you code is not broken up into independent modules, you should always be thinking about access control. Marking a definition as "private" or "internal" can act as lightweight documentation for your code. Anyone reading the code will know that these elements are "hands off". Conversely, marking a definition as "public" is an invite for other code to access the marked elements. It is best to be explicit and not rely on Swift's default access control level ("internal").
+Even if your code is not broken up into independent modules, you should always be thinking about access control. Marking a definition as "private" or "internal" can act as lightweight documentation for your code. Anyone reading the code will know that these elements are "hands off". Conversely, marking a definition as "public" is an invite for other code to access the marked elements. It is best to be explicit and not rely on Swift's default access control level ("internal").
 
 If your codebase grows in the future, it may end being broken down into sub-modules. Doing so on a codebase already decorated with access control information is much quicker and easier.
 
