@@ -346,7 +346,7 @@ If your codebase grows in the future, it may end being broken down into sub-modu
 
 It is generally better to be overly restrictive when adding access control to your code. Where it makes sense prefer "private" definitions to "internal", and prefer "internal" to "public" (note: "internal" is the default).
 
-It is far easier to change the access control of your code to be more permissive later (along the spectrum: "private" to "internal" to "public") as needed. Code that is has too permissive access control might be used inappropriately by other code. Making code more restrictive could involve finding the inappropriate or incorrect uses and providing better interfaces. This is a trying to close the stable door after the horse has bolted style problem. An example of this could be a type exposing an internal cache publically.
+It is far easier to change the access control of your code to be more permissive later (along the spectrum: "private" to "internal" to "public") as needed. Code that is has too permissive access control might be used inappropriately by other code. Making code more restrictive could involve finding the inappropriate or incorrect uses and providing better interfaces. This is a trying to close the stable door after the horse has bolted style problem. An example of this could be a type exposing an internal cache publicly.
 
 Furthermore, restricting access to code limits the "exposed surface area" and allows the code to be refactored with less chance of impacting other code. Other techniques such as "Protocol Driven Development" can also help.
 
