@@ -84,9 +84,9 @@ struct Example {
 }
 ```
 
-### Capture List Inference
+### Parameter List Inference
 
-Specifying parameter types inside a capture list can lead to a rather verbose code. Only specify types if needed.
+Specifying parameter types inside a closure expression can lead to a rather verbose code. Only specify types if needed.
 
 ```swift
 let people = [
@@ -110,11 +110,11 @@ let strings = people.map() {
 }
 ```
 
-Using the numbered parameter names ("`$0`") further reduces verbosity, often eliminating capture lists completely. Only use the numbered form when the parameter names add no further information to the closure (e.g. very simple maps and filters).
+Using the numbered parameter names ("`$0`") further reduces verbosity, often eliminating the parameter list completely. Only use the numbered form when the parameter names add no further information to the closure (e.g. very simple maps and filters).
 
 Apple can and will change the parameter types of closures provided by their Swift "conversion" of Objective-C frameworks. For example, optionals are removed or changed to auto-unwrapping etc. Intentionally under-specifying your optionals and relying on Swift to infer the types, reduces the risk of the code breaking under these circumstances.
 
-You should almost always refrain from specifying the return type. For example this capture list is completely redundant:
+You should almost always refrain from specifying the return type. For example this parameter list is completely redundant:
 
 ```swift
 dispatch_async(queue) {
@@ -122,8 +122,6 @@ dispatch_async(queue) {
     print("Fired.")
 }
 ```
-
-(see also: http://www.russbishop.net/swift-capture-lists)
 
 ### Constants
 
