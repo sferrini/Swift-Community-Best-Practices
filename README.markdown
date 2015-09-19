@@ -226,6 +226,7 @@ Singletons are simple in Swift:
 
 ```swift
 class ControversyManager {
+    private init() {}
     static let sharedInstance = ControversyManager()
 }
 ```
